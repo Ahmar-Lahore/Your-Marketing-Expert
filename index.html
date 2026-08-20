@@ -13,8 +13,8 @@
     }
   })();
 </script>
-<title>Ahmar — Digital Marketing Strategist | Lahore, Pakistan</title>
-<meta name="description" content="Ahmar — Digital Marketing Strategist based in Lahore, Pakistan. Helping businesses grow with SEO, paid ads, branding and social media strategy.">
+<title>Ahmar — Digital Marketing Strategist | Toronto, ON</title>
+<meta name="description" content="Ahmar — Digital Marketing Strategist based in Toronto, ON. Helping businesses grow with SEO, paid ads, branding and social media strategy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -175,9 +175,18 @@
     transition:opacity .6s ease;
   }
   html[data-theme="light"] .sunburst{ opacity:1; }
-  .sunburst circle{ animation:sunburst-spin 140s linear infinite; transform-origin:450px 450px; }
+  .sunburst .dots-a{
+    animation:sunburst-spin 70s linear infinite;
+    transform-origin:450px 450px;
+  }
+  .sunburst .dots-b{
+    animation:sunburst-spin-rev 100s linear infinite;
+    transform-origin:450px 450px;
+  }
+  .sunburst .ring-static{ transform-origin:450px 450px; }
   @keyframes sunburst-spin{ to{ transform:rotate(360deg); } }
-  @media (prefers-reduced-motion: reduce){ .sunburst circle{ animation:none; } }
+  @keyframes sunburst-spin-rev{ to{ transform:rotate(-360deg); } }
+  @media (prefers-reduced-motion: reduce){ .sunburst .dots-a, .sunburst .dots-b{ animation:none; } }
   @media (max-width:720px){ .sunburst{ width:640px; height:640px; top:2%; } }
 
   /* every section sits above the starfield */
@@ -218,12 +227,24 @@
     border-bottom:1px solid var(--line);
     background:rgba(var(--bg-rgb),0.92);
   }
+  html[data-theme="light"] nav{
+    backdrop-filter:blur(20px) saturate(160%);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    box-shadow:inset 0 -1px 0 rgba(255,255,255,0.6);
+  }
+  html[data-theme="light"] nav.scrolled{
+    box-shadow:inset 0 -1px 0 rgba(255,255,255,0.6), 0 8px 30px rgba(120,64,74,0.06);
+  }
   .logo{
     font-family:'Cormorant Garamond', serif;
     font-size:1.5rem;
     letter-spacing:0.06em;
   }
   .logo em{ font-style:normal; color:var(--blush); }
+
+  .nav-end{
+    display:flex; align-items:center; gap:18px;
+  }
 
   .nav-links{
     display:flex; align-items:center; gap:44px;
@@ -284,8 +305,13 @@
     display:flex; align-items:center; justify-content:center;
     cursor:pointer;
     flex-shrink:0;
-    margin-left:8px;
     transition:border-color .3s ease, background .3s ease, color .3s ease, transform .3s ease;
+  }
+  html[data-theme="light"] .theme-toggle{
+    background:rgba(255,255,255,0.55);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.8);
   }
   .theme-toggle:hover{
     border-color:var(--blush);
@@ -514,8 +540,11 @@
   .card p{ color:var(--muted); font-size:0.92rem; line-height:1.65; }
 
   html[data-theme="light"] .card{
-    box-shadow:0 12px 32px rgba(120,64,74,0.09);
-    border-color:rgba(196,112,138,0.16);
+    background:linear-gradient(160deg, rgba(255,255,255,0.85), rgba(255,247,242,0.6));
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.85), 0 12px 32px rgba(120,64,74,0.09);
+    border-color:rgba(255,255,255,0.55);
   }
   html[data-theme="light"] .card::before{
     content:"";
@@ -523,8 +552,15 @@
     background:linear-gradient(90deg, var(--blush), var(--gold));
     opacity:0.85;
   }
+  html[data-theme="light"] .card::after{
+    content:"";
+    position:absolute; top:0; left:-30%; width:55%; height:100%;
+    background:linear-gradient(115deg, rgba(255,255,255,0.5), transparent 60%);
+    transform:skewX(-12deg);
+    pointer-events:none;
+  }
   html[data-theme="light"] .card:hover{
-    box-shadow:0 20px 46px rgba(120,64,74,0.15);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.9), 0 20px 46px rgba(120,64,74,0.16);
   }
 
   /* ---------- ABOUT ---------- */
@@ -546,8 +582,13 @@
     overflow:hidden;
   }
   html[data-theme="light"] .about-mark{
-    box-shadow:0 20px 50px rgba(120,64,74,0.10);
-    border-color:rgba(196,112,138,0.18);
+    background:
+      radial-gradient(120% 120% at 20% 15%, rgba(240,184,196,0.25), transparent 55%),
+      linear-gradient(150deg, rgba(255,255,255,0.85), rgba(255,247,242,0.55));
+    backdrop-filter:blur(18px) saturate(160%);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.85), 0 20px 50px rgba(120,64,74,0.10);
+    border-color:rgba(255,255,255,0.55);
   }
   html[data-theme="light"] .about-mark::after{
     content:"";
@@ -555,6 +596,14 @@
     border:1px solid rgba(169,121,63,0.3);
     border-radius:20px;
     pointer-events:none;
+  }
+  html[data-theme="light"] .about-mark::before{
+    content:"";
+    position:absolute; top:0; left:-30%; width:55%; height:100%;
+    background:linear-gradient(115deg, rgba(255,255,255,0.55), transparent 60%);
+    transform:skewX(-12deg);
+    pointer-events:none;
+    z-index:1;
   }
   .about-mark span{
     font-family:'Cormorant Garamond', serif;
@@ -587,13 +636,23 @@
     overflow:hidden;
   }
   html[data-theme="light"] .contact-card{
-    box-shadow:0 24px 60px rgba(120,64,74,0.12);
-    border-color:rgba(196,112,138,0.18);
+    background:linear-gradient(160deg, rgba(255,255,255,0.88), rgba(255,247,242,0.62));
+    backdrop-filter:blur(20px) saturate(160%);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,0.9), 0 24px 60px rgba(120,64,74,0.12);
+    border-color:rgba(255,255,255,0.55);
   }
   html[data-theme="light"] .contact-card::before{
     content:"";
     position:absolute; top:0; left:0; right:0; height:4px;
     background:linear-gradient(90deg, var(--blush), var(--gold), var(--blush));
+  }
+  html[data-theme="light"] .contact-card::after{
+    content:"";
+    position:absolute; top:0; left:-25%; width:45%; height:100%;
+    background:linear-gradient(115deg, rgba(255,255,255,0.45), transparent 60%);
+    transform:skewX(-12deg);
+    pointer-events:none;
   }
   .contact-card h2{ font-size:clamp(2rem,4.5vw,2.6rem); margin-bottom:14px; }
   .contact-card p.lead{ color:var(--muted); margin-bottom:38px; line-height:1.7; }
@@ -644,7 +703,6 @@
     .nav-links.open{ transform:translateX(0); }
     .nav-links a{ font-size:1rem; }
     .nav-links a.nav-contact{ margin-top:6px; }
-    .nav-links .theme-toggle{ margin-left:0; margin-top:6px; }
     .nav-toggle.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2){ opacity:0; }
     .nav-toggle.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
@@ -721,28 +779,31 @@
 
 <nav id="siteNav">
   <div class="logo">Ahmar<em>.</em></div>
-  <div class="nav-links" id="navLinks">
-    <a href="#home">Home</a>
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a class="nav-contact" href="#contact">Get in Touch</a>
+  <div class="nav-end">
+    <div class="nav-links" id="navLinks">
+      <a href="#home">Home</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a class="nav-contact" href="#contact">Get in Touch</a>
+    </div>
     <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to day mode">
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7" stroke-linecap="round"/></svg>
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke-linejoin="round"/></svg>
     </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <section class="hero" id="home">
   <svg class="sunburst" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <g>
-      <circle cx="450" cy="450" r="210" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.35"/>
-      <circle cx="450" cy="450" r="290" fill="none" stroke="var(--blush)" stroke-width="1" opacity="0.25"/>
-      <circle cx="450" cy="450" r="370" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="2 10" opacity="0.3"/>
-      <g opacity="0.3">
+      <circle class="ring-static" cx="450" cy="450" r="210" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.35"/>
+      <circle class="ring-static" cx="450" cy="450" r="290" fill="none" stroke="var(--blush)" stroke-width="1" opacity="0.25"/>
+      <circle class="dots-a" cx="450" cy="450" r="370" fill="none" stroke="var(--gold)" stroke-width="2.6" stroke-linecap="round" stroke-dasharray="1 15" opacity="0.65"/>
+      <circle class="dots-b" cx="450" cy="450" r="250" fill="none" stroke="var(--blush)" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="1 13" opacity="0.5"/>
+      <g class="ring-static" opacity="0.3">
         <line x1="450" y1="60" x2="450" y2="120" stroke="var(--gold)" stroke-width="1.4"/>
         <line x1="450" y1="780" x2="450" y2="840" stroke="var(--gold)" stroke-width="1.4"/>
         <line x1="60" y1="450" x2="120" y2="450" stroke="var(--gold)" stroke-width="1.4"/>
@@ -756,7 +817,7 @@
   </svg>
   <div class="hero-ring"></div>
   <div class="hero-ring r2"></div>
-  <div class="eyebrow">Lahore, Pakistan</div>
+  <div class="eyebrow">Toronto, ON</div>
   <h1>Grow with<br><span>Ahmar</span></h1>
   <p class="role">Digital Marketing Strategist &amp; Brand Growth Consultant</p>
   <p class="tagline">A results-driven approach to digital growth — combining strategic marketing, refined branding and data-led campaigns to help ambitious businesses scale with confidence.</p>
@@ -827,7 +888,7 @@
     <div>
       <div class="eyebrow">About</div>
       <h2>A partner for your business, not just a service.</h2>
-      <p>I'm Ahmar, a digital marketing strategist based in Pakistan, working with businesses that are ready to grow beyond word-of-mouth. My approach blends creative thinking with measurable strategy — every campaign is built to be tracked, tested and improved.</p>
+      <p>I'm Ahmar, a digital marketing strategist based in Toronto, working with businesses that are ready to grow beyond word-of-mouth. My approach blends creative thinking with measurable strategy — every campaign is built to be tracked, tested and improved.</p>
       <p>Whether you're launching, scaling, or simply want your marketing to finally work as hard as you do, I bring a calm, professional process from first conversation to results.</p>
       <div class="tags">
         <span>SEO</span>
@@ -854,7 +915,7 @@
         Send Me an Email
       </a>
       <div class="contact-details">
-        <div><strong>Location</strong> — Lahore, Pakistan</div>
+        <div><strong>Location</strong> — Toronto, ON</div>
         <div><strong>Response Time</strong> — Usually within a few hours</div>
         <div><strong>Available</strong> — Mon – Sat, by appointment</div>
       </div>
@@ -863,12 +924,12 @@
 </section>
 
 <footer>
-  <span class="fname">Ahmar</span> · Digital Marketing Strategist · Lahore, Pakistan &copy; <span id="year"></span>
+  <span class="fname">Ahmar</span> · Digital Marketing Strategist · Toronto, ON &copy; <span id="year"></span>
 </footer>
 
-<a class="float-cta" id="floatCta" href="https://wa.me/923096639830?text=Hi%20Ahmar%2C%20I%27d%20like%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
+<a class="float-cta" id="floatCta" href="https://wa.me/18194861377?text=Hi%20Ahmar%2C%20I%27d%20like%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
   <span class="pulse-dot"></span>
-  Get in Touch
+  Message me — let's talk growth
 </a>
 
 <script>
