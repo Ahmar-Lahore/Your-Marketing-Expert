@@ -3,14 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmar — Digital Marketing Strategist | Lahore, Pakistan</title>
-<meta name="description" content="Ahmar — Digital Marketing Strategist based in Lahore, Pakistan. Helping businesses grow with SEO, paid ads, branding and social media strategy.">
+<script>
+  (function(){
+    try{
+      var t = localStorage.getItem('ahmar-theme');
+      document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : 'dark');
+    }catch(e){
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
+<title>Ahmar — Digital Marketing Strategist | Toronto, ON</title>
+<meta name="description" content="Ahmar — Digital Marketing Strategist based in Toronto, ON. Helping businesses grow with SEO, paid ads, branding and social media strategy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#130E11;
+    --bg-rgb:19,14,17;
     --bg-soft:#1C1519;
     --bg-card:#20171B;
     --line: rgba(240,184,196,0.14);
@@ -22,9 +33,27 @@
     --shadow: 0 20px 60px rgba(0,0,0,0.45);
   }
 
+  html[data-theme="light"]{
+    --bg:#FBF5F1;
+    --bg-rgb:251,245,241;
+    --bg-soft:#F5E9E2;
+    --bg-card:#FFFFFF;
+    --line: rgba(196,112,138,0.18);
+    --cream:#2B1A20;
+    --muted:#7A6169;
+    --blush:#D9587C;
+    --blush-deep:#B83E63;
+    --gold:#A9793F;
+    --shadow: 0 20px 60px rgba(120,70,60,0.14);
+  }
+
   *{box-sizing:border-box; margin:0; padding:0;}
 
   html{scroll-behavior:smooth;}
+
+  body, nav, .card, .contact-card, .about-mark, footer, .nav-links, .theme-toggle{
+    transition:background-color .45s ease, background .45s ease, color .45s ease, border-color .45s ease;
+  }
 
   body{
     background:
@@ -82,6 +111,21 @@
     14%{ transform:translate(55vw,55vh) rotate(215deg); opacity:0; }
     100%{ transform:translate(55vw,55vh) rotate(215deg); opacity:0; }
   }
+  html[data-theme="light"] .shooting-star{ display:none; }
+
+  /* soft daylight glow, shown only in light mode */
+  .sun-glow{
+    position:fixed;
+    top:-12%; right:-8%;
+    width:640px; height:640px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(217,178,124,0.35), rgba(217,178,124,0.08) 55%, transparent 72%);
+    z-index:0;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .6s ease;
+  }
+  html[data-theme="light"] .sun-glow{ opacity:1; }
 
   /* every section sits above the starfield */
   nav, .hero, section, footer{ position:relative; z-index:2; }
@@ -113,13 +157,13 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:22px 40px;
     backdrop-filter:blur(14px);
-    background:linear-gradient(to bottom, rgba(19,14,17,0.92), rgba(19,14,17,0.6) 80%, transparent);
+    background:linear-gradient(to bottom, rgba(var(--bg-rgb),0.92), rgba(var(--bg-rgb),0.6) 80%, transparent);
     border-bottom:1px solid transparent;
     transition:border-color .3s ease, background .3s ease;
   }
   nav.scrolled{
     border-bottom:1px solid var(--line);
-    background:rgba(19,14,17,0.92);
+    background:rgba(var(--bg-rgb),0.92);
   }
   .logo{
     font-family:'Cormorant Garamond', serif;
@@ -175,6 +219,35 @@
     background:var(--cream);
     transition:transform .3s ease, opacity .3s ease;
   }
+
+  /* ---------- THEME TOGGLE ---------- */
+  .theme-toggle{
+    position:relative;
+    width:38px; height:38px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:rgba(240,184,196,0.05);
+    color:var(--cream);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    flex-shrink:0;
+    margin-left:8px;
+    transition:border-color .3s ease, background .3s ease, color .3s ease, transform .3s ease;
+  }
+  .theme-toggle:hover{
+    border-color:var(--blush);
+    background:rgba(240,184,196,0.12);
+    transform:translateY(-1px);
+  }
+  .theme-toggle svg{
+    position:absolute;
+    width:17px; height:17px;
+    transition:opacity .35s ease, transform .45s cubic-bezier(.2,.9,.3,1);
+  }
+  .theme-toggle .icon-sun{ opacity:0; transform:rotate(-80deg) scale(0.5); }
+  .theme-toggle .icon-moon{ opacity:1; transform:rotate(0deg) scale(1); }
+  html[data-theme="light"] .theme-toggle .icon-sun{ opacity:1; transform:rotate(0deg) scale(1); }
+  html[data-theme="light"] .theme-toggle .icon-moon{ opacity:0; transform:rotate(80deg) scale(0.5); }
 
   /* ---------- SPARKLE BUTTON (signature element) ---------- */
   .shine-btn{
@@ -472,7 +545,7 @@
       justify-content:center;
       gap:30px;
       padding:0 40px;
-      background:rgba(19,14,17,0.98);
+      background:rgba(var(--bg-rgb),0.98);
       backdrop-filter:blur(18px);
       border-left:1px solid var(--line);
       transform:translateX(100%);
@@ -481,6 +554,7 @@
     .nav-links.open{ transform:translateX(0); }
     .nav-links a{ font-size:1rem; }
     .nav-links a.nav-contact{ margin-top:6px; }
+    .nav-links .theme-toggle{ margin-left:0; margin-top:6px; }
     .nav-toggle.open span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2){ opacity:0; }
     .nav-toggle.open span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
@@ -548,6 +622,7 @@
 </head>
 <body>
 
+<div class="sun-glow"></div>
 <div id="starfield"><canvas id="starCanvas"></canvas></div>
 <div class="shooting-star s1"></div>
 <div class="shooting-star s2"></div>
@@ -560,6 +635,10 @@
     <a href="#services">Services</a>
     <a href="#about">About</a>
     <a class="nav-contact" href="#contact">Get in Touch</a>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" aria-label="Switch to day mode">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7" stroke-linecap="round"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z" stroke-linejoin="round"/></svg>
+    </button>
   </div>
   <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -569,14 +648,14 @@
 <section class="hero" id="home">
   <div class="hero-ring"></div>
   <div class="hero-ring r2"></div>
-  <div class="eyebrow">Lahore, Pakistan</div>
+  <div class="eyebrow">Toronto, ON</div>
   <h1>Grow with<br><span>Ahmar</span></h1>
   <p class="role">Digital Marketing Strategist &amp; Brand Growth Consultant</p>
   <p class="tagline">A results-driven approach to digital growth — combining strategic marketing, refined branding and data-led campaigns to help ambitious businesses scale with confidence.</p>
   <div class="hero-stats">
-    <div class="stat"><span class="stat-num">4+</span><span class="stat-label">Years Experience</span></div>
+    <div class="stat"><span class="stat-num">6+</span><span class="stat-label">Years Experience</span></div>
     <div class="stat-divider"></div>
-    <div class="stat"><span class="stat-num">19+</span><span class="stat-label">Brands Grown</span></div>
+    <div class="stat"><span class="stat-num">50+</span><span class="stat-label">Brands Grown</span></div>
     <div class="stat-divider"></div>
     <div class="stat"><span class="stat-num">3x</span><span class="stat-label">Avg. ROI Impact</span></div>
   </div>
@@ -640,7 +719,7 @@
     <div>
       <div class="eyebrow">About</div>
       <h2>A partner for your business, not just a service.</h2>
-      <p>I'm Ahmar, a digital marketing strategist based in Pakistan, working with businesses that are ready to grow beyond word-of-mouth. My approach blends creative thinking with measurable strategy — every campaign is built to be tracked, tested and improved.</p>
+      <p>I'm Ahmar, a digital marketing strategist based in Toronto, working with businesses that are ready to grow beyond word-of-mouth. My approach blends creative thinking with measurable strategy — every campaign is built to be tracked, tested and improved.</p>
       <p>Whether you're launching, scaling, or simply want your marketing to finally work as hard as you do, I bring a calm, professional process from first conversation to results.</p>
       <div class="tags">
         <span>SEO</span>
@@ -667,7 +746,7 @@
         Send Me an Email
       </a>
       <div class="contact-details">
-        <div><strong>Location</strong> — Lahore, Pakistan</div>
+        <div><strong>Location</strong> — Toronto, ON</div>
         <div><strong>Response Time</strong> — Usually within a few hours</div>
         <div><strong>Available</strong> — Mon – Sat, by appointment</div>
       </div>
@@ -676,12 +755,12 @@
 </section>
 
 <footer>
-  <span class="fname">Ahmar</span> · Digital Marketing Strategist · Lahore, Pakistan &copy; <span id="year"></span>
+  <span class="fname">Ahmar</span> · Digital Marketing Strategist · Toronto, ON &copy; <span id="year"></span>
 </footer>
 
-<a class="float-cta" id="floatCta" href="https://wa.me/923096639830?text=Hi%20Ahmar%2C%20I%27d%20like%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
+<a class="float-cta" id="floatCta" href="https://wa.me/18194861377?text=Hi%20Ahmar%2C%20I%27d%20like%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
   <span class="pulse-dot"></span>
-   let's talk growth
+  Message me — let's talk growth
 </a>
 
 <script>
@@ -718,45 +797,60 @@
       buildStars();
     }
 
+    function isLight(){
+      return document.documentElement.getAttribute('data-theme') === 'light';
+    }
+
     function buildStars(){
-      const density = (w * h) / 9000;
-      const count = Math.min(Math.round(density), 420);
+      const light = isLight();
+      const density = (w * h) / (light ? 15000 : 9000);
+      const count = Math.min(Math.round(density), light ? 160 : 420);
       stars = [];
       for(let i=0;i<count;i++){
         const layer = Math.random();
         stars.push({
           x: Math.random()*w,
           y: Math.random()*h,
-          r: layer < 0.6 ? Math.random()*0.9+0.4 : (layer < 0.9 ? Math.random()*1.2+0.9 : Math.random()*1.6+1.3),
-          baseAlpha: Math.random()*0.5+0.35,
+          r: light
+            ? (layer < 0.7 ? Math.random()*1.1+0.6 : Math.random()*2+1.6)
+            : (layer < 0.6 ? Math.random()*0.9+0.4 : (layer < 0.9 ? Math.random()*1.2+0.9 : Math.random()*1.6+1.3)),
+          baseAlpha: light ? Math.random()*0.25+0.12 : Math.random()*0.5+0.35,
           speed: Math.random()*0.015+0.005,
           phase: Math.random()*Math.PI*2,
-          hue: Math.random() < 0.15 ? 'gold' : (Math.random() < 0.25 ? 'blush' : 'cream'),
-          drift: (Math.random()-0.5)*0.02
+          hue: light
+            ? (Math.random() < 0.5 ? 'gold' : 'blush')
+            : (Math.random() < 0.15 ? 'gold' : (Math.random() < 0.25 ? 'blush' : 'cream')),
+          drift: (Math.random()-0.5)*(light ? 0.008 : 0.02)
         });
       }
     }
 
     const colors = {
       cream: '246,239,233',
-      blush: '240,184,196',
-      gold: '217,178,124'
+      blush: '217,110,140',
+      gold: '184,135,79'
+    };
+    const colorsLight = {
+      blush: '224,150,170',
+      gold: '201,161,110'
     };
 
     let t = 0;
     function draw(){
+      const light = isLight();
+      const palette = light ? colorsLight : colors;
       ctx.clearRect(0,0,w,h);
       t += 1;
       for(const s of stars){
         const twinkle = Math.sin(t*s.speed + s.phase);
-        const alpha = s.baseAlpha + twinkle*0.35;
+        const alpha = s.baseAlpha + twinkle*(light ? 0.15 : 0.35);
         ctx.beginPath();
-        ctx.fillStyle = `rgba(${colors[s.hue]},${Math.max(alpha,0.05)})`;
+        ctx.fillStyle = `rgba(${palette[s.hue] || palette.gold},${Math.max(alpha,0.04)})`;
         ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
         ctx.fill();
         if(s.r > 1.6 && twinkle > 0.6){
           ctx.beginPath();
-          ctx.fillStyle = `rgba(${colors[s.hue]},${(twinkle-0.6)*0.4})`;
+          ctx.fillStyle = `rgba(${palette[s.hue] || palette.gold},${(twinkle-0.6)*(light ? 0.18 : 0.4)})`;
           ctx.arc(s.x, s.y, s.r*3.5, 0, Math.PI*2);
           ctx.fill();
         }
@@ -774,6 +868,24 @@
       // draw a single static frame
       draw();
     }
+
+    /* ---------- THEME TOGGLE ---------- */
+    const themeToggle = document.getElementById('themeToggle');
+    function setTheme(theme, persist){
+      document.documentElement.setAttribute('data-theme', theme);
+      themeToggle.setAttribute('aria-pressed', theme === 'light' ? 'true' : 'false');
+      themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark mode' : 'Switch to day mode');
+      if(persist){
+        try{ localStorage.setItem('ahmar-theme', theme); }catch(e){}
+      }
+      buildStars();
+      if(reduceMotion) draw();
+    }
+    setTheme(document.documentElement.getAttribute('data-theme') || 'dark', false);
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      setTheme(next, true);
+    });
   })();
 
   /* subtle presence for the floating CTA — ease it back near the footer */
