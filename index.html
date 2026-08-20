@@ -13,8 +13,8 @@
     }
   })();
 </script>
-<title>Ahmar — Digital Marketing Strategist | Lahore, Pakistan</title>
-<meta name="description" content="Ahmar — Digital Marketing Strategist based in Lahore, Pakistan. Helping businesses grow with SEO, paid ads, branding and social media strategy.">
+<title>Ahmar — Digital Marketing Strategist | Toronto, ON</title>
+<meta name="description" content="Ahmar — Digital Marketing Strategist based in Toronto, ON. Helping businesses grow with SEO, paid ads, branding and social media strategy.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -67,6 +67,36 @@
     position:relative;
   }
 
+  html[data-theme="light"] body{
+    background:
+      radial-gradient(1400px 1000px at 12% -8%, rgba(217,88,124,0.08), transparent 78%),
+      radial-gradient(1200px 900px at 96% 4%, rgba(169,121,63,0.12), transparent 75%),
+      radial-gradient(1300px 1000px at 50% 60%, rgba(217,88,124,0.05), transparent 80%),
+      linear-gradient(180deg, #FCF7F3, #F9EEE6 20%, #F7EAE1 55%, #F9EEE6 100%);
+  }
+  /* fine linen-like grain, light mode only, for a paper-elegant finish */
+  html[data-theme="light"] body::before{
+    content:"";
+    position:fixed; inset:0;
+    z-index:0;
+    pointer-events:none;
+    opacity:0.5;
+    background-image:
+      radial-gradient(rgba(169,121,63,0.07) 1px, transparent 1px);
+    background-size:26px 26px;
+  }
+
+  /* top hairline accent, light mode only */
+  html[data-theme="light"] body::after{
+    content:"";
+    position:fixed; top:0; left:0; right:0;
+    height:3px;
+    z-index:70;
+    pointer-events:none;
+    background:linear-gradient(90deg, transparent, var(--blush) 25%, var(--gold) 50%, var(--blush) 75%, transparent);
+    opacity:0.75;
+  }
+
   /* ---------- STARFIELD ---------- */
   #starfield{
     position:fixed;
@@ -116,16 +146,39 @@
   /* soft daylight glow, shown only in light mode */
   .sun-glow{
     position:fixed;
-    top:-12%; right:-8%;
-    width:640px; height:640px;
+    top:-14%; right:-10%;
+    width:680px; height:680px;
     border-radius:50%;
-    background:radial-gradient(circle, rgba(217,178,124,0.35), rgba(217,178,124,0.08) 55%, transparent 72%);
+    background:radial-gradient(circle, rgba(217,178,124,0.38), rgba(217,178,124,0.10) 55%, transparent 72%);
     z-index:0;
     pointer-events:none;
     opacity:0;
     transition:opacity .6s ease;
   }
+  .sun-glow.secondary{
+    top:auto; bottom:-18%; right:auto; left:-12%;
+    width:560px; height:560px;
+    background:radial-gradient(circle, rgba(217,88,124,0.16), rgba(217,88,124,0.05) 55%, transparent 72%);
+  }
   html[data-theme="light"] .sun-glow{ opacity:1; }
+
+  /* delicate sunburst line-art behind the hero, light mode only */
+  .sunburst{
+    position:absolute;
+    top:6%; left:50%;
+    transform:translateX(-50%);
+    width:900px; height:900px;
+    max-width:none;
+    z-index:-1;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity .6s ease;
+  }
+  html[data-theme="light"] .sunburst{ opacity:1; }
+  .sunburst circle{ animation:sunburst-spin 140s linear infinite; transform-origin:450px 450px; }
+  @keyframes sunburst-spin{ to{ transform:rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce){ .sunburst circle{ animation:none; } }
+  @media (max-width:720px){ .sunburst{ width:640px; height:640px; top:2%; } }
 
   /* every section sits above the starfield */
   nav, .hero, section, footer{ position:relative; z-index:2; }
@@ -442,6 +495,8 @@
     border:1px solid var(--line);
     border-radius:20px;
     padding:32px 26px;
+    position:relative;
+    overflow:hidden;
     transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
   }
   .card:hover{
@@ -457,6 +512,20 @@
   }
   .card h3{ font-size:1.28rem; margin-top:12px; margin-bottom:10px; font-weight:600; }
   .card p{ color:var(--muted); font-size:0.92rem; line-height:1.65; }
+
+  html[data-theme="light"] .card{
+    box-shadow:0 12px 32px rgba(120,64,74,0.09);
+    border-color:rgba(196,112,138,0.16);
+  }
+  html[data-theme="light"] .card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, var(--blush), var(--gold));
+    opacity:0.85;
+  }
+  html[data-theme="light"] .card:hover{
+    box-shadow:0 20px 46px rgba(120,64,74,0.15);
+  }
 
   /* ---------- ABOUT ---------- */
   .about{
@@ -475,6 +544,17 @@
     display:flex; align-items:center; justify-content:center;
     position:relative;
     overflow:hidden;
+  }
+  html[data-theme="light"] .about-mark{
+    box-shadow:0 20px 50px rgba(120,64,74,0.10);
+    border-color:rgba(196,112,138,0.18);
+  }
+  html[data-theme="light"] .about-mark::after{
+    content:"";
+    position:absolute; inset:10px;
+    border:1px solid rgba(169,121,63,0.3);
+    border-radius:20px;
+    pointer-events:none;
   }
   .about-mark span{
     font-family:'Cormorant Garamond', serif;
@@ -504,6 +584,16 @@
     border-radius:28px;
     padding:64px 40px;
     position:relative;
+    overflow:hidden;
+  }
+  html[data-theme="light"] .contact-card{
+    box-shadow:0 24px 60px rgba(120,64,74,0.12);
+    border-color:rgba(196,112,138,0.18);
+  }
+  html[data-theme="light"] .contact-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:4px;
+    background:linear-gradient(90deg, var(--blush), var(--gold), var(--blush));
   }
   .contact-card h2{ font-size:clamp(2rem,4.5vw,2.6rem); margin-bottom:14px; }
   .contact-card p.lead{ color:var(--muted); margin-bottom:38px; line-height:1.7; }
@@ -623,6 +713,7 @@
 <body>
 
 <div class="sun-glow"></div>
+<div class="sun-glow secondary"></div>
 <div id="starfield"><canvas id="starCanvas"></canvas></div>
 <div class="shooting-star s1"></div>
 <div class="shooting-star s2"></div>
@@ -646,9 +737,26 @@
 </nav>
 
 <section class="hero" id="home">
+  <svg class="sunburst" viewBox="0 0 900 900" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g>
+      <circle cx="450" cy="450" r="210" fill="none" stroke="var(--gold)" stroke-width="1" opacity="0.35"/>
+      <circle cx="450" cy="450" r="290" fill="none" stroke="var(--blush)" stroke-width="1" opacity="0.25"/>
+      <circle cx="450" cy="450" r="370" fill="none" stroke="var(--gold)" stroke-width="1" stroke-dasharray="2 10" opacity="0.3"/>
+      <g opacity="0.3">
+        <line x1="450" y1="60" x2="450" y2="120" stroke="var(--gold)" stroke-width="1.4"/>
+        <line x1="450" y1="780" x2="450" y2="840" stroke="var(--gold)" stroke-width="1.4"/>
+        <line x1="60" y1="450" x2="120" y2="450" stroke="var(--gold)" stroke-width="1.4"/>
+        <line x1="780" y1="450" x2="840" y2="450" stroke="var(--gold)" stroke-width="1.4"/>
+        <line x1="174" y1="174" x2="216" y2="216" stroke="var(--blush)" stroke-width="1.4"/>
+        <line x1="684" y1="684" x2="726" y2="726" stroke="var(--blush)" stroke-width="1.4"/>
+        <line x1="726" y1="174" x2="684" y2="216" stroke="var(--blush)" stroke-width="1.4"/>
+        <line x1="216" y1="684" x2="174" y2="726" stroke="var(--blush)" stroke-width="1.4"/>
+      </g>
+    </g>
+  </svg>
   <div class="hero-ring"></div>
   <div class="hero-ring r2"></div>
-  <div class="eyebrow">Lahore, Pakistan</div>
+  <div class="eyebrow">Toronto, ON</div>
   <h1>Grow with<br><span>Ahmar</span></h1>
   <p class="role">Digital Marketing Strategist &amp; Brand Growth Consultant</p>
   <p class="tagline">A results-driven approach to digital growth — combining strategic marketing, refined branding and data-led campaigns to help ambitious businesses scale with confidence.</p>
@@ -719,7 +827,7 @@
     <div>
       <div class="eyebrow">About</div>
       <h2>A partner for your business, not just a service.</h2>
-      <p>I'm Ahmar, a digital marketing strategist based in Pakistan, working with businesses that are ready to grow beyond word-of-mouth. My approach blends creative thinking with measurable strategy — every campaign is built to be tracked, tested and improved.</p>
+      <p>I'm Ahmar, a digital marketing strategist based in Toronto, working with businesses that are ready to grow beyond word-of-mouth. My approach blends creative thinking with measurable strategy — every campaign is built to be tracked, tested and improved.</p>
       <p>Whether you're launching, scaling, or simply want your marketing to finally work as hard as you do, I bring a calm, professional process from first conversation to results.</p>
       <div class="tags">
         <span>SEO</span>
@@ -746,7 +854,7 @@
         Send Me an Email
       </a>
       <div class="contact-details">
-        <div><strong>Location</strong> — Lahore, Pakistan</div>
+        <div><strong>Location</strong> — Toronto, ON</div>
         <div><strong>Response Time</strong> — Usually within a few hours</div>
         <div><strong>Available</strong> — Mon – Sat, by appointment</div>
       </div>
@@ -755,12 +863,12 @@
 </section>
 
 <footer>
-  <span class="fname">Ahmar</span> · Digital Marketing Strategist · Lahore, Pakistan &copy; <span id="year"></span>
+  <span class="fname">Ahmar</span> · Digital Marketing Strategist · Toronto, ON &copy; <span id="year"></span>
 </footer>
 
-<a class="float-cta" id="floatCta" href="https://wa.me/923096639830?text=Hi%20Ahmar%2C%20I%27d%20like%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
+<a class="float-cta" id="floatCta" href="https://wa.me/18194861377?text=Hi%20Ahmar%2C%20I%27d%20like%20to%20talk%20about%20growing%20my%20business." target="_blank" rel="noopener">
   <span class="pulse-dot"></span>
-  let's talk growth
+  Message me — let's talk growth
 </a>
 
 <script>
